@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Account Detection - ML App</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-shield-alt"></i> Fake Account Detection</h1>
+                <p class="subtitle">Machine Learning Powered Instagram Account Verification</p>
+                <p class="subtitle-small">All models are pre-trained and ready for testing</p>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('prediction')">
+                <i class="fas fa-search"></i> Prediction
+            </button>
+            <button class="tab-btn" onclick="showTab('metrics')">
+                <i class="fas fa-chart-bar"></i> Model Metrics
+            </button>
+            <button class="tab-btn" onclick="showTab('dataset')">
+                <i class="fas fa-database"></i> Dataset
+            </button>
+        </div>
+
+        <!-- Prediction Tab -->
+        <div id="prediction" class="tab-content active">
+            <div class="card">
+                <h2><i class="fas fa-user-check"></i> Fake Account Detection</h2>
+                <p class="card-description">Enter Instagram account features or paste a profile URL to automatically fetch data and detect if it's fake or real. All models are pre-trained and ready to use.</p>
+                
+                <!-- Input Mode Selection -->
+                <div class="input-mode-selector" style="margin-bottom: 30px; padding: 20px; background: var(--dark-bg); border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 15px; color: var(--text-primary);">Choose Input Method:</h3>
+                    <div class="options-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <label class="radio-card">
+                            <input type="radio" name="input_mode" value="manual" id="input-mode-manual" checked onchange="toggleInputMode()">
+                            <div class="radio-content">
+                                <i class="fas fa-keyboard"></i>
+                                <span>Manual Entry</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="input_mode" value="url" id="input-mode-url" onchange="toggleInputMode()">
+                            <div class="radio-content">
+                                <i class="fas fa-link"></i>
+                                <span>Profile URL</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- URL Input Form -->
+                <form id="url-prediction-form" class="prediction-form" style="display: none;">
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label><i class="fas fa-link"></i> Instagram Profile URL</label>
+                        <input type="url" name="profile_url" id="profile-url-input" required placeholder="https://www.instagram.com/username/" style="width: 100%;">
+                        <small style="color: var(--text-secondary); margin-top: 5px; display: block;">Paste any Instagram profile URL (e.g., https://www.instagram.com/username/)</small>
+                    </div>
+
+                    <!-- Prediction Options -->
+                    <div class="prediction-options">
+                        <h3>Select Prediction Mode:</h3>
+                        <div class="options-grid">
+                            <label class="radio-card">
+                                <input type="radio" name="url_prediction_mode" value="basic-best" checked>
+                                <div class="radio-content">
+                                    <i class="fas fa-star"></i>
+                                    <span>Basic - Best Model</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="url_prediction_mode" value="advanced-best">
+                                <div class="radio-content">
+                                    <i class="fas fa-star"></i>
+                                    <span>Advanced - Best Model</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="url_prediction_mode" value="basic-all">
+                                <div class="radio-content">
+                                    <i class="fas fa-list"></i>
+                                    <span>All Basic Models</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="url_prediction_mode" value="advanced-all">
+                                <div class="radio-content">
+                                    <i class="fas fa-list"></i>
+                                    <span>All Advanced Models</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-magic"></i> Fetch & Predict from URL
+                    </button>
+                </form>
+                
+                <!-- Manual Input Form -->
+                <form id="prediction-form" class="prediction-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-images"></i> Media Count</label>
+                            <input type="number" name="user_media_count" required min="0" placeholder="Number of posts">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-users"></i> Follower Count</label>
+                            <input type="number" name="user_follower_count" required min="0" placeholder="Total followers">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-user-plus"></i> Following Count</label>
+                            <input type="number" name="user_following_count" required min="0" placeholder="Total following">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-image"></i> Has Profile Picture</label>
+                            <select name="user_has_profil_pic" required>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> Is Private</label>
+                            <select name="user_is_private" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-align-left"></i> Biography Length</label>
+                            <input type="number" name="user_biography_length" required min="0" placeholder="Characters in bio">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-at"></i> Username Length</label>
+                            <input type="number" name="username_length" required min="0" placeholder="Characters in username">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-hashtag"></i> Username Digit Count</label>
+                            <input type="number" name="username_digit_count" required min="0" placeholder="Number of digits">
+                        </div>
+                    </div>
+
+                    <!-- Prediction Options -->
+                    <div class="prediction-options">
+                        <h3>Select Prediction Mode:</h3>
+                        <div class="options-grid">
+                            <label class="radio-card">
+                                <input type="radio" name="prediction_mode" value="basic-best" checked>
+                                <div class="radio-content">
+                                    <i class="fas fa-star"></i>
+                                    <span>Basic - Best Model</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="prediction_mode" value="advanced-best">
+                                <div class="radio-content">
+                                    <i class="fas fa-star"></i>
+                                    <span>Advanced - Best Model</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="prediction_mode" value="basic-all">
+                                <div class="radio-content">
+                                    <i class="fas fa-list"></i>
+                                    <span>All Basic Models</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="prediction_mode" value="advanced-all">
+                                <div class="radio-content">
+                                    <i class="fas fa-list"></i>
+                                    <span>All Advanced Models</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="prediction_mode" value="basic-single">
+                                <div class="radio-content">
+                                    <i class="fas fa-hand-pointer"></i>
+                                    <span>Basic - Select Model</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="prediction_mode" value="advanced-single">
+                                <div class="radio-content">
+                                    <i class="fas fa-hand-pointer"></i>
+                                    <span>Advanced - Select Model</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Model Selection Dropdowns -->
+                        <div id="basic-model-select" class="model-select" style="display:none;">
+                            <label>Select Basic Model:</label>
+                            <select id="basic-model-dropdown">
+                                <option value="">Select a model...</option>
+                            </select>
+                        </div>
+                        <div id="advanced-model-select" class="model-select" style="display:none;">
+                            <label>Select Advanced Model:</label>
+                            <select id="advanced-model-dropdown">
+                                <option value="">Select a model...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-search"></i> Predict Account
+                    </button>
+                </form>
+
+                <!-- Results -->
+                <div id="prediction-results" class="results-container"></div>
+            </div>
+        </div>
+
+        <!-- Metrics Tab -->
+        <div id="metrics" class="tab-content">
+            <div class="card">
+                <h2><i class="fas fa-chart-line"></i> Trained Model Performance</h2>
+                <p class="card-description">View performance metrics of all trained models</p>
+                <div class="metrics-tabs">
+                    <button class="metrics-btn active" onclick="showMetrics('basic')">Basic Models</button>
+                    <button class="metrics-btn" onclick="showMetrics('advanced')">Advanced Models</button>
+                </div>
+                <div id="basic-metrics" class="metrics-content">
+                    <div class="loading">Loading basic models metrics...</div>
+                </div>
+                <div id="advanced-metrics" class="metrics-content" style="display:none;">
+                    <div class="loading">Loading advanced models metrics...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dataset Tab -->
+        <div id="dataset" class="tab-content">
+            <div class="card">
+                <h2><i class="fas fa-database"></i> Dataset Information</h2>
+                <p class="card-description">Explore the InstaFake dataset used for training the models</p>
+                <div id="dataset-content">
+                    <div class="loading">Loading dataset information...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
