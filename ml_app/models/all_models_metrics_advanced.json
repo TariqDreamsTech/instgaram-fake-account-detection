@@ -1,0 +1,150 @@
+{
+    "Random Forest (Tuned)": {
+        "model_file": "model_advanced_random_forest_tuned.joblib",
+        "model_type": "traditional_ml",
+        "metrics": {
+            "accuracy": 0.9777777777777777,
+            "precision": 0.9333333333333333,
+            "recall": 0.9333333333333333,
+            "f1_score": 0.9333333333333333
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count",
+            "engagement_ratio",
+            "following_follower_ratio",
+            "username_density"
+        ]
+    },
+    "XGBoost (Tuned)": {
+        "model_file": "model_advanced_xgboost_tuned.joblib",
+        "model_type": "traditional_ml",
+        "metrics": {
+            "accuracy": 0.9722222222222222,
+            "precision": 1.0,
+            "recall": 0.8333333333333334,
+            "f1_score": 0.9090909090909091
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count",
+            "engagement_ratio",
+            "following_follower_ratio",
+            "username_density"
+        ]
+    },
+    "Gradient Boosting (Tuned)": {
+        "model_file": "model_advanced_gradient_boosting_tuned.joblib",
+        "model_type": "traditional_ml",
+        "metrics": {
+            "accuracy": 0.9722222222222222,
+            "precision": 0.9032258064516129,
+            "recall": 0.9333333333333333,
+            "f1_score": 0.9180327868852459
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count",
+            "engagement_ratio",
+            "following_follower_ratio",
+            "username_density"
+        ]
+    },
+    "Voting Ensemble": {
+        "model_file": "model_advanced_voting_ensemble.joblib",
+        "model_type": "traditional_ml",
+        "metrics": {
+            "accuracy": 0.9833333333333333,
+            "precision": 0.9655172413793104,
+            "recall": 0.9333333333333333,
+            "f1_score": 0.9491525423728814
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count",
+            "engagement_ratio",
+            "following_follower_ratio",
+            "username_density"
+        ]
+    },
+    "Stacking Ensemble": {
+        "model_file": "model_advanced_stacking_ensemble.joblib",
+        "model_type": "traditional_ml",
+        "metrics": {
+            "accuracy": 0.9666666666666667,
+            "precision": 0.9285714285714286,
+            "recall": 0.8666666666666667,
+            "f1_score": 0.896551724137931
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count",
+            "engagement_ratio",
+            "following_follower_ratio",
+            "username_density"
+        ]
+    },
+    "Neural Network": {
+        "model_file": "model_advanced_neural_network.h5",
+        "model_type": "neural_network",
+        "metrics": {
+            "accuracy": 0.9555555555555556,
+            "precision": 0.9583333333333334,
+            "recall": 0.7666666666666667,
+            "f1_score": 0.8518518518518519,
+            "auc": 0.9897777777777778
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count",
+            "engagement_ratio",
+            "following_follower_ratio",
+            "username_density"
+        ]
+    },
+    "scaler_file": "scaler_advanced.joblib",
+    "best_model": "Voting Ensemble",
+    "best_f1_score": 0.9491525423728814
+}

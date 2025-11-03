@@ -1,0 +1,93 @@
+{
+    "Random Forest": {
+        "model_file": "model_basic_random_forest.joblib",
+        "model_type": "basic_ml",
+        "metrics": {
+            "accuracy": 0.9748953974895398,
+            "precision": 0.9722222222222222,
+            "recall": 0.875,
+            "f1_score": 0.9210526315789473
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count"
+        ],
+        "uses_scaler": false
+    },
+    "Gradient Boosting": {
+        "model_file": "model_basic_gradient_boosting.joblib",
+        "model_type": "basic_ml",
+        "metrics": {
+            "accuracy": 0.9748953974895398,
+            "precision": 0.9722222222222222,
+            "recall": 0.875,
+            "f1_score": 0.9210526315789473
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count"
+        ],
+        "uses_scaler": false
+    },
+    "Logistic Regression": {
+        "model_file": "model_basic_logistic_regression.joblib",
+        "model_type": "basic_ml",
+        "metrics": {
+            "accuracy": 0.9623430962343096,
+            "precision": 1.0,
+            "recall": 0.775,
+            "f1_score": 0.8732394366197183
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count"
+        ],
+        "uses_scaler": true
+    },
+    "SVM": {
+        "model_file": "model_basic_svm.joblib",
+        "model_type": "basic_ml",
+        "metrics": {
+            "accuracy": 0.9581589958158996,
+            "precision": 1.0,
+            "recall": 0.75,
+            "f1_score": 0.8571428571428571
+        },
+        "feature_columns": [
+            "user_media_count",
+            "user_follower_count",
+            "user_following_count",
+            "user_has_profil_pic",
+            "user_is_private",
+            "follower_following_ratio",
+            "user_biography_length",
+            "username_length",
+            "username_digit_count"
+        ],
+        "uses_scaler": true
+    },
+    "scaler_file": "scaler_basic.joblib",
+    "best_model": "Random Forest",
+    "best_f1_score": 0.9210526315789473
+}
